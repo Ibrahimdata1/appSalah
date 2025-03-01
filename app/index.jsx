@@ -1,7 +1,6 @@
 import { View, Text, ScrollView, StatusBar, Image } from "react-native";
 import { Redirect, router } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Award, Briefcase, Rocket } from "lucide-react-native";
 import * as NavigationBar from "expo-navigation-bar";
 import { useEffect } from "react";
 import images from "../assets/images";

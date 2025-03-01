@@ -7,88 +7,59 @@ import {
   TouchableOpacity,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import images from "../../assets/images";
 import { LinearGradient } from "expo-linear-gradient";
+import { router } from "expo-router"; // Import useRouter
+import images from "../../assets/images";
 
-const signIn = () => {
+const SignIn = () => {
   return (
     <LinearGradient colors={["#1e293b", "#0f172a"]} style={{ flex: 1 }}>
       <SafeAreaView className="bg-slate-900 h-full">
         <ScrollView
           contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
         >
-          <View
-            style={{
-              justifyContent: "center",
-              gap: 10,
-              alignItems: "center",
-              marginHorizontal: 13,
-            }}
-          >
+          <View className="justify-center gap-10 items-center mx-4">
+            {/* โลโก้แอพ */}
             <Image
               source={images.banner}
               resizeMode="contain"
               className="w-1/2 h-20"
             />
-            <Text className="text-lg text-white text-semibold font-poppinsBold">
+
+            {/* หัวข้อ */}
+            <Text className="text-lg text-white font-bold">
               Sign in to JobFinder
             </Text>
-            {/* Input Fields */}
-            <View style={{ width: "100%", marginTop: 24 }}>
-              <Text style={{ color: "white", fontSize: 16, marginBottom: 8 }}>
-                Email
-              </Text>
+
+            {/* ฟอร์มกรอกข้อมูล */}
+            <View className="w-full mt-6">
+              <Text className="text-white text-lg mb-2">Email</Text>
               <TextInput
-                style={{
-                  backgroundColor: "white",
-                  color: "black",
-                  padding: 12,
-                  borderRadius: 10,
-                  width: "100%",
-                }}
+                className="bg-white text-black p-3 rounded-lg w-full"
                 placeholder="Enter your email"
                 keyboardType="email-address"
               />
 
-              <Text
-                style={{
-                  color: "white",
-                  fontSize: 16,
-                  marginTop: 16,
-                  marginBottom: 8,
-                }}
-              >
-                Password
-              </Text>
+              <Text className="text-white text-lg mt-4 mb-2">Password</Text>
               <TextInput
-                style={{
-                  backgroundColor: "white",
-                  color: "black",
-                  padding: 12,
-                  borderRadius: 10,
-                  width: "100%",
-                }}
+                className="bg-white text-black p-3 rounded-lg w-full"
                 placeholder="Enter your password"
                 secureTextEntry
               />
             </View>
 
-            {/* Sign In Button */}
+            {/* ปุ่ม Sign In */}
             <TouchableOpacity
-              style={{
-                backgroundColor: "#2563eb",
-                padding: 16,
-                borderRadius: 10,
-                alignItems: "center",
-                width: "100%",
-                marginTop: 24,
-              }}
-              onPress={() => router.push("/home")}
+              className="bg-blue-500 p-4 rounded-lg w-full items-center mt-6"
+              onPress={() => router.push("/home")} // ไปหน้า Home หลังเข้าสู่ระบบ
             >
-              <Text
-                style={{ color: "white", fontSize: 18, fontWeight: "bold" }}
-              >
-                Sign In
+              <Text className="text-white text-lg font-bold">Sign In</Text>
+            </TouchableOpacity>
+
+            {/* ปุ่มไปหน้า Sign Up */}
+            <TouchableOpacity onPress={() => router.push("/signUp")}>
+              <Text className="text-blue-400 text-sm mt-4">
+                ยังไม่มีบัญชี? <Text className="font-bold">สมัครสมาชิก</Text>
               </Text>
             </TouchableOpacity>
           </View>
@@ -98,4 +69,4 @@ const signIn = () => {
   );
 };
 
-export default signIn;
+export default SignIn;

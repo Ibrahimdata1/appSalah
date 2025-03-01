@@ -9,9 +9,9 @@ import "../global.css";
 
 const RootLayout = () => {
   const [fontsLoaded] = useFonts({
-    PoppinsRegular: Poppins_400Regular,
-    PoppinsBold: Poppins_700Bold,
-    Montserrat: Montserrat_700Bold,
+    poppinsRegular: Poppins_400Regular,
+    poppinsBold: Poppins_700Bold,
+    montserrat: Montserrat_700Bold,
   });
   if (!fontsLoaded) {
     return null;

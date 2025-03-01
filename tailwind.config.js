@@ -6,11 +6,9 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        poppins: ["PoppinsRegular"],
-        poppinsBold: ["PoppinsBold"],
-        roboto: ["RobotoRegular"],
-        noto: ["NotoSansRegular"],
-        montserrat: ["MontserratBold"],
+        poppinsRegular: ["poppinsRegular"], // ✅ ต้องใช้ชื่อเดียวกับที่ `useFonts` โหลดมา
+        poppinsBold: ["poppinsBold"],
+        montserrat: ["montserrat"],
       },
     },
     plugins: [],
