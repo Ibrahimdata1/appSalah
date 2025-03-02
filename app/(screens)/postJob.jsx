@@ -3,10 +3,11 @@ import { View, Text, TextInput, Button, Alert } from "react-native";
 import * as Location from "expo-location";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function PostJobScreen() {
+export default function PostJob() {
   const [jobTitle, setJobTitle] = useState("");
   const [company, setCompany] = useState("");
   const [salary, setSalary] = useState("");
+  const [description, setDescription] = useState("");
   const [location, setLocation] = useState(null);
 
   const getLocation = async () => {
@@ -20,8 +21,11 @@ export default function PostJobScreen() {
   };
 
   const postJob = async () => {
-    if (!jobTitle || !company || !salary || !location) {
-      Alert.alert("กรอกข้อมูลให้ครบ!", "ต้องมีชื่อ ตำแหน่ง เงินเดือน และพิกัด");
+    if (!jobTitle || !company || !salary || !location || !description) {
+      Alert.alert(
+        "กรอกข้อมูลให้ครบ!",
+        "ต้องมีชื่อ ตำแหน่ง เงินเดือน รายละเอียดงานและพิกัด"
+      );
       return;
     }
 
@@ -30,6 +34,7 @@ export default function PostJobScreen() {
       title: jobTitle,
       company,
       salary,
+      description,
       lat: location.latitude,
       lng: location.longitude,
     };
@@ -47,6 +52,7 @@ export default function PostJobScreen() {
     setJobTitle("");
     setCompany("");
     setSalary("");
+    setDescription("");
     setLocation(null);
   };
 
@@ -86,6 +92,18 @@ export default function PostJobScreen() {
         placeholder="เงินเดือน"
         value={salary}
         onChangeText={setSalary}
+      />
+      <TextInput
+        style={{
+          borderWidth: 1,
+          padding: 8,
+          marginTop: 8,
+          borderColor: "#000",
+        }}
+        multiline
+        placeholder="รายละเอียดงาน"
+        value={description}
+        onChangeText={setDescription}
       />
 
       <Button title="ใช้ตำแหน่ง GPS ปัจจุบัน" onPress={getLocation} />

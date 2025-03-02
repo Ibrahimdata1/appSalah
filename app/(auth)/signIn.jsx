@@ -5,13 +5,34 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { LinearGradient } from "expo-linear-gradient";
-import { router } from "expo-router"; // Import useRouter
+import { router } from "expo-router";
 import images from "../../assets/images";
+import { useAuth } from "../contexts/authContext";
+import { useState } from "react";
 
 const SignIn = () => {
+  const { login } = useAuth();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const handleLogin = () => {
+    if (!email || !password) {
+      Alert.alert("กรุณากรอกอีเมลและรหัสผ่าน");
+      return;
+    }
+    const mockUserData = {
+      name: "Ali Ahmad",
+      email: email,
+      phone: "0812345678",
+    };
+
+    login(mockUserData); // อัปเดตข้อมูลผู้ใช้ใน Context
+    Alert.alert("เข้าสู่ระบบสำเร็จ!");
+    router.push("/home");
+  };
   return (
     <LinearGradient colors={["#1e293b", "#0f172a"]} style={{ flex: 1 }}>
       <SafeAreaView className="bg-slate-900 h-full">

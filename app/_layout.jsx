@@ -5,6 +5,7 @@ import {
 } from "@expo-google-fonts/poppins";
 import { Montserrat_700Bold } from "@expo-google-fonts/montserrat"; // ใช้อันนี้แทน
 import { Stack } from "expo-router";
+import { AuthProvider } from "./contexts/authContext";
 import "../global.css";
 
 const RootLayout = () => {
@@ -17,9 +18,11 @@ const RootLayout = () => {
     return null;
   }
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-    </Stack>
+    <AuthProvider>
+      <Stack>
+        <Stack.Screen name="index" options={{ headerShown: false }} />
+      </Stack>
+    </AuthProvider>
   );
 };
 
