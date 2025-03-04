@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { View, Text, TextInput, Button, Alert } from "react-native";
 import * as Location from "expo-location";
+import { router } from "expo-router";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function PostJob() {
@@ -112,6 +113,7 @@ export default function PostJob() {
       )}
 
       <Button title="โพสต์งาน" onPress={postJob} />
+      <Button title="กลับหน้าดูงาน" onPress={() => router.push("/jobScreen")} />
     </View>
   );
 }

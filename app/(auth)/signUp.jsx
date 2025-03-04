@@ -1,13 +1,18 @@
 import { View, Text, TextInput, TouchableOpacity, Alert } from "react-native";
 import { router } from "expo-router";
 import { useState } from "react";
+import axios from "axios";
+
+const API_URL = "http://192.168.1.135:8000"; // เปลี่ยนเป็น IP ของ backend จริงเมื่อใช้งานบนมือถือ
+
 const signUp = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [phone, setPhone] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleRegister = () => {
+  const handleRegister = async () => {
     if (!name || !email || !password || !confirmPassword) {
       Alert.alert("กรุณากรอกข้อมูลให้ครบถ้วน");
       return;
@@ -16,9 +21,25 @@ const signUp = () => {
       Alert.alert("รหัสผ่านไม่ตรงกัน");
       return;
     }
-    // ส่งข้อมูลไปยัง Backend (API) ได้ที่นี่
-    Alert.alert("ลงทะเบียนสำเร็จ!");
-    router.push("/signIn"); // ส่งไปหน้า Login
+
+    try {
+      const response = await axios.post(`${API_URL}/auth/register`, {
+        name,
+        email,
+        password,
+        phone,
+      });
+      console.log(response.status);
+      if (response.status === 201) {
+        Alert.alert("ลงทะเบียนสำเร็จ!");
+        router.push("/signIn"); // ส่งไปหน้า Login
+      }
+    } catch (error) {
+      console.error("เกิดข้อผิดพลาด:", error);
+      Alert.alert(
+        error.response?.data?.message || "เกิดข้อผิดพลาด กรุณาลองใหม่"
+      );
+    }
   };
 
   return (
@@ -50,6 +71,13 @@ const signUp = () => {
         secureTextEntry
         value={confirmPassword}
         onChangeText={setConfirmPassword}
+      />
+      <TextInput
+        className="w-full h-12 bg-white rounded-lg px-4 mb-4 border border-gray-300"
+        placeholder="เบอร์โทรศัพท์"
+        keyboardType="phone-pad"
+        value={phone}
+        onChangeText={setPhone}
       />
       <TouchableOpacity
         className="bg-blue-500 p-4 rounded-lg w-full items-center"
